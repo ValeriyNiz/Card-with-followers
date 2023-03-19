@@ -23,7 +23,8 @@
 .bgPic {
   position: absolute;
   top: 28px;
-  left: 36px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .line {
@@ -38,6 +39,7 @@
 
 .userPic {
   position: absolute;
+  border-radius: 20px;
   top: 178px;
 }
 
@@ -61,14 +63,12 @@
 }
 
 .tweetsFollCont {
-  justify-content: center;
   text-align: center;
   margin-top: 284px;
   width: 214px;
 }
 
 .followBtn {
-  position: absolute;
   height: 50px;
   width: 196px;
   border-radius: 10px;
@@ -82,23 +82,9 @@
   color: #373737;
 }
 
-.followingBtn {
-  position: absolute;
-  height: 50px;
-  width: 196px;
-  border-radius: 10px;
-  background-color: #5cd3a8;
-  box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 0.8;
-  color: #373737;
-}
-
 .btnCont {
   position: absolute;
-  left: 92px;
+  left: 50%;
+  transform: translateX(-50%);
   top: 374px;
 }

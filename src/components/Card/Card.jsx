@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import {
+  getContactsFromStorage,
+  saveContactsToStorage,
+} from '../../storage/storage';
 import css from './Card.module.css';
 
+const initialFollowersCount = 100500;
+
 export const Card = () => {
-  const [active, setActive] = useState(false);
-  const [buttonText, setButtonText] = useState('FOLLOW');
+  const [isFollowing, setIsFollowing] = useState(false);
+
   const handleClick = () => {
-    setActive(!active);
-    setButtonText(!buttonText);
+    setIsFollowing(!isFollowing);
+    saveContactsToStorage('isFollowing', !isFollowing);
   };
+
+  useEffect(() => {
+    if (getContactsFromStorage) {
+      setIsFollowing(getContactsFromStorage);
+    }
+  }, []);
+
+  const followersCount = useMemo(() => {
+    return isFollowing ? initialFollowersCount + 1 : initialFollowersCount;
+  }, [isFollowing]);
 
   return (
     <div className={css.container}>
@@ -20,19 +36,19 @@ export const Card = () => {
         </div>
         <div className={css.line}></div>
         <div className={css.userPic}>
-          <img src="/images/Boy.png" alt="boy" height="80" width="80" />
+          <img src="/images/Trump.png" alt="boy" height="80" width="80" />
         </div>
         <div className={css.tweetsFollCont}>
           <p className={css.tweets}>777 TWEETS</p>
-          <p className={css.followers}>100,500 FOLLOWERS</p>
+          <p className={css.followers}>{followersCount} FOLLOWERS</p>
         </div>
         <div className={css.btnCont}>
           <button
             onClick={handleClick}
-            style={{ backgroundColor: active ? '#5cd3a8' : '#ebd8ff' }}
+            style={{ backgroundColor: isFollowing ? '#5cd3a8' : '#ebd8ff' }}
             className={css.followBtn}
           >
-            {buttonText ? 'FOLLOW' : 'FOLLOWING'}
+            {isFollowing ? 'FOLLOWING' : 'FOLLOW'}
           </button>
         </div>
       </div>

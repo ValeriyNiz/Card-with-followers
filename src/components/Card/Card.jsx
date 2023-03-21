@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
-  getContactsFromStorage,
-  saveContactsToStorage,
+  getFollowingFromStorage,
+  saveFollowingToStorage,
 } from '../../storage/storage';
 import css from './Card.module.css';
 
@@ -12,12 +12,13 @@ export const Card = () => {
 
   const handleClick = () => {
     setIsFollowing(!isFollowing);
-    saveContactsToStorage('isFollowing', !isFollowing);
+    saveFollowingToStorage(isFollowing);
   };
 
   useEffect(() => {
-    if (getContactsFromStorage) {
-      setIsFollowing(getContactsFromStorage);
+    const storageIsFollowing = getFollowingFromStorage();
+    if (storageIsFollowing) {
+      setIsFollowing(storageIsFollowing);
     }
   }, []);
 
@@ -36,7 +37,7 @@ export const Card = () => {
         </div>
         <div className={css.line}></div>
         <div className={css.userPic}>
-          <img src="/images/Trump.png" alt="boy" height="80" width="80" />
+          <img src="/images/Boy.png" alt="boy" height="80" width="80" />
         </div>
         <div className={css.tweetsFollCont}>
           <p className={css.tweets}>777 TWEETS</p>
@@ -55,3 +56,15 @@ export const Card = () => {
     </div>
   );
 };
+
+// const handleClick = () => {
+//   setIsFollowing(!isFollowing);
+//   localStorage.setItem('isFollowing', JSON.stringify(!isFollowing));
+// };
+
+// useEffect(() => {
+//   const storageIsFollowing = JSON.parse(localStorage.getItem('isFollowing'));
+//   if (storageIsFollowing) {
+//     setIsFollowing(storageIsFollowing);
+//   }
+// }, []);
